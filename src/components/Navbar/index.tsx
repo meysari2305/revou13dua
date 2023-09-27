@@ -17,14 +17,23 @@ const items: MenuProps['items'] = [
   },
   {
     label: 'Log Out',
-    key: '/register',
+    key: '/login',
   },
 ];
 
 const Navbar = () => {
   const navigate = useNavigate();
 
+  const handleLogOut = () => {
+    localStorage.removeItem('token');
+    window.location.replace('/login');
+  };
+
   const onClick: MenuProps['onClick'] = (e) => {
+    if (e.key === '/register') {
+      handleLogOut();
+      return;
+    }
     navigate(e.key);
   };
 
